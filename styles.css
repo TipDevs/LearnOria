@@ -24,9 +24,9 @@ body {
 }
 
 header {
-    background: var(--primary-color);
-    color: #fff;
-    padding: 1rem 2rem;
+    background: var(--background-color);
+    color: var(--primary-color);
+    padding: 0.3rem 2rem;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -54,7 +54,7 @@ header img{
 
 .nav-links a {
     text-decoration: none;
-    color: #fff;
+    color: var(--primary-color);
     font-weight: bold;
     transition: color 0.3s;
 }
@@ -68,7 +68,7 @@ header img{
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 6rem 2rem;
+    padding: 10rem 2rem;
     background: linear-gradient(to right, var(--primary-color), var(--accent-color));
     color: #fff;
     animation: fadeIn 1.5s ease-in;
@@ -98,7 +98,6 @@ header img{
 }
 
 section {
-    padding: 6rem 2rem;
     animation: fadeInUp 1.5s ease-in;
 }
 
@@ -108,7 +107,7 @@ section {
     box-shadow: 0 4px 6px var(--shadow-color);
     border-radius: 8px;
     margin: 3rem auto;
-    padding: 3rem;
+    padding: 10rem 2rem;
 }
 .join p{
     padding-bottom: 15px;
