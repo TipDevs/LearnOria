@@ -25,7 +25,7 @@ body {
 
 header {
     background: var(--primary-color);
-    color: #fff;
+    color: var(--background-color);
     padding: 1rem 2rem;
     position: sticky;
     top: 0;
@@ -41,6 +41,7 @@ header img{
     display: flex;
     justify-content: space-between;
     align-items: center;
+
 }
 
 .nav-links {
@@ -54,7 +55,7 @@ header img{
 
 .nav-links a {
     text-decoration: none;
-    color: #fff;
+    color: var(--background-color);
     font-weight: bold;
     transition: color 0.3s;
 }
@@ -109,6 +110,7 @@ section {
     border-radius: 8px;
     margin: 3rem auto;
     padding: 3rem;
+    scroll-margin-top: 20vh;
 }
 .join p{
     padding-bottom: 15px;
@@ -232,3 +234,181 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+/* css for the new one  */
+.contact-section {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    animation: fadeIn 1s ease-in-out;
+    margin: 3rem auto;
+    padding: 3rem;
+    scroll-margin-top: 20vh
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .contact-section h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .contact-section form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  .form-group label {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 14px;
+    color: #666;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  .form-group input:focus + label,
+  .form-group textarea:focus + label,
+  .form-group input:not(:placeholder-shown) + label,
+  .form-group textarea:not(:placeholder-shown) + label {
+    top: -14px;
+    left: 10px;
+    background: #ffffff;
+    padding: 0 5px;
+    color: #007bff;
+    font-size: 12px;
+  }
+
+  .form-group textarea {
+    resize: none;
+    height: 100px;
+  }
+
+  .submit-btn {
+    background: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    background: #0056b3;
+  }
+
+  .submit-btn:active {
+    transform: scale(0.98);
+  }
+  /* footer */
+  .footer {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 40px 20px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    animation: slideUp 1s ease-in-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .footer-logo {
+    margin-bottom: 20px;
+  }
+
+  .footer-logo img {
+    max-width: 150px;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .footer-links {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+  }
+
+  .footer-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover {
+    color: var(--accent-color);
+  }
+
+  .footer-text {
+    font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .footer {
+      padding: 20px;
+    }
+
+    .footer-links {
+      flex-direction: column;
+    }
+  }

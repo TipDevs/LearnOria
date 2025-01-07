@@ -17,7 +17,7 @@
                 <li><a href="#features">Features</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#success-stories">Success Stories</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact-section">Contact</a></li>
             </ul>
             <div class="auth-buttons">
                 <a href="#login" class="btn">Login</a>
@@ -84,17 +84,36 @@
         </div>
     </section>
 
-    <section id="contact" class="join">
-        <h2>Join Us Today</h2>
-        <p>Ready to take the first step? Join the 9jaSkillHub community and unlock your potential!</p>
-        <a href="#signup" class="btn">Sign Up</a>
+    <section class="contact-section" id="contact-section">
+        <h2>Contact Us</h2>
+        <form>
+            <div class="form-group">
+                <input type="text" id="name" name="name" placeholder=" " required>
+                <label for="name">Your Name</label>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" name="email" placeholder=" " required>
+                <label for="email">Your Email</label>
+            </div>
+            <div class="form-group">
+                <textarea id="complaint" name="complaint" placeholder=" " required></textarea>
+                <label for="complaint">Your Complaint</label>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
     </section>
 
-    <footer>
+    <footer class="footer">
         <div class="footer-logo">
-            <img src="hublogo.png" alt="9jaSkillHub Logo">
+          <img src="hublogo.png" alt="Company Logo">
         </div>
-        <p>&copy; 2025 9jaSkillHub. All rights reserved.</p>
-    </footer>
+        <div class="footer-links">
+          <a href="#">Home</a>
+          <a href="#">About</a>
+          <a href="#">Services</a>
+          <a href="#">Contact</a>
+        </div>
+        <p class="footer-text">&copy; 2025 9jaSkillsHub. All rights reserved.</p>
+      </footer>
 </body>
 </html>
