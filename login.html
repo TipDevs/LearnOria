@@ -28,16 +28,24 @@
         </div>
     </header>
 
-    <main>
-        <h2>Log in to your account</h2>
-        <span>Or</span>
-        <a href="">Sign up for a new account</a>
+    <main id="login-content">
+        <div id="login-instruction">
+            <h2>Log in to your account</h2>
+            <span>Or</span>
+            <a href="">Sign up for a new account</a>
+        </div>
         <form action="get" id="login-form">
-            <label for="email">Email</label>
-            <input type="email" required placeholder="Enter your email">
-            <label for="password">Password</label>
-            <input type="password" required placeholder="Enter your password">
-            <input type="button" value="submit" >
+            <div class="box">
+                <label for="email">Email</label>
+                <input type="email" required placeholder="Enter your email">
+            </div>
+            <div class="box">
+                <label for="password">Password</label>
+                <input type="password" required placeholder="Enter your password">
+            </div>
+            
+            <input type="button" value="Log In" >
+            <a href="#resetpassowrd">forgotten password?</a>
         </form>
     </main>
 
