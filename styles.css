@@ -439,7 +439,6 @@ footer {
     padding: 30px 10px;
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--primary-color);
     box-shadow: 3px 5px 50px var(--primary-color);
     align-items: center;
     justify-content: center;
