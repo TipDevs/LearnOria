@@ -93,9 +93,18 @@ header img{
     border-radius: 5px;
     transition: background 0.3s;
 }
+.login {
+  background: var(--background-color);
+  color: var(--accent-color);
+  font-weight: bold;
+  border: 1px solid var(--primary-color);
+}
 
-.btn:hover {
+.sign-up:hover {
     background: var(--highlight-color);
+}
+.login:hover {
+  background: var(--shadow-color);
 }
 
 section {
@@ -410,3 +419,6 @@ footer {
       flex-direction: column;
     }
   }
+
+  /* login page style */
+  
