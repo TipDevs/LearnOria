@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="styles.css">
     <title>9jaSkillHub</title>
 </head>
-<body>
+<body id="login-body">
     <header>
         <div class="navbar">
             <div class="logo">
-                <a href="#">
-                    <img src="hublogo.png" alt="9jaSkillHub Logo">
+                <a href="./index.html">
+                    <img src="hublogo.png" alt="9jaSkillHub Logo">9jaSkillHub
                 </a>
             </div>
             <ul class="nav-links">
@@ -28,25 +28,27 @@
         </div>
     </header>
 
-    <main id="login-content">
-        <div id="login-instruction">
-            <h2>Log in to your account</h2>
-            <span>Or</span>
-            <a href="">Sign up for a new account</a>
+    <main>
+        <div id="login-content">
+            <div id="login-instruction">
+                <h2>Log in to your account</h2>
+                <span>Or</span>
+                <a href="">Sign up for a new account</a>
+            </div>
+            <form action="get" id="login-form">
+                <div class="box">
+                    <label for="email">Email</label>
+                    <input type="email" required placeholder="Enter your email">
+                </div>
+                <div class="box">
+                    <label for="password">Password</label>
+                    <input type="password" required placeholder="Enter your password">
+                </div>
+                
+                <input type="button" value="Log In" id="login-btn">
+                <a href="#resetpassowrd">forgotten password?</a>
+            </form>
         </div>
-        <form action="get" id="login-form">
-            <div class="box">
-                <label for="email">Email</label>
-                <input type="email" required placeholder="Enter your email">
-            </div>
-            <div class="box">
-                <label for="password">Password</label>
-                <input type="password" required placeholder="Enter your password">
-            </div>
-            
-            <input type="button" value="Log In" id="login-btn">
-            <a href="#resetpassowrd">forgotten password?</a>
-        </form>
     </main>
 
     <footer class="footer">
