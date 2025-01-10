@@ -1,13 +1,14 @@
 :root {
-    --primary-color: #0078d4; /* Vibrant Blue */
+    --primary-color: #34495E; /* Vibrant Blue */
     --secondary-color: #fbbc05; /* Bright Yellow */
     --background-color: #f3f4f6; /* Soft Gray */
     --text-color: #202124; /* Dark Gray */
     --accent-color: #ff6f00; /* Bright Orange */
     --card-color: #ffffff; /* Clean White */
-    --shadow-color: rgba(0, 0, 0, 0.1); /* Subtle Shadow */
-    --highlight-color: #ff5722; /* Warm Orange */
+    --shadow-color:  0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.06); /* Subtle Shadow */
+    --highlight-color: #34495E; /* Warm Orange */
     --font-family: 'Arial', sans-serif;
+    
 }
 
 * {
@@ -31,6 +32,7 @@ header {
     top: 0;
     z-index: 1000;
     animation: slideInDown 1s ease-in-out;
+    box-shadow: var(--shadow-color);
 }
 header img{
     height: 70px;
@@ -62,7 +64,7 @@ header img{
 }
 
 .nav-links a:hover {
-    color: var(--highlight-color);
+    color: var(--accent-color);
 }
 
 .logo a {
@@ -382,7 +384,33 @@ footer {
     margin-top: 20px;
     animation: slideUp 1s ease-in-out;
   }
-
+  .hero-content h1{
+  
+      display: inline-block;
+      font-size: 2rem;
+      white-space: nowrap; /* Keeps text on a single line */
+      overflow: hidden; /* Hides text that is "outside" the width */
+      border-right: 2px solid var(--cursor-color); /* Creates a cursor effect */
+      animation: typing 4s steps(22) 1s forwards, blink 0.7s step-end infinite;
+  }
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%; /* Full width of the text */
+    }
+  }
+  
+  /* Cursor Blink Animation */
+  @keyframes blink {
+    from {
+      border-color: var(--cursor-color);
+    }
+    to {
+      border-color: transparent;
+    }
+  }
   @keyframes slideUp {
     from {
       opacity: 0;

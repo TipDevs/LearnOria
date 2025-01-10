@@ -1,0 +1,287 @@
+:root {
+    --primary-color: #34495E; /* Vibrant Blue */
+    --secondary-color: #fbbc05; /* Bright Yellow */
+    --background-color: #f3f4f6; /* Soft Gray */
+    --text-color: #202124; /* Dark Gray */
+    --accent-color: #ff6f00; /* Bright Orange */
+    --card-color: #ffffff; /* Clean White */
+    --shadow-color: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.06); /* Subtle Shadow */
+    --highlight-color: #34495E; /* Warm Orange */
+    --font-family: 'Arial', sans-serif;
+  }
+
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 500px;
+    background-color: var(--card-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-color);
+    padding: 2rem;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+  }
+
+  .header p {
+    font-size: 1rem;
+    color: var(--accent-color);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid var(--background-color);
+    border-radius: 4px;
+    background-color: var(--background-color);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .form-group input:focus, .form-group select:focus {
+    box-shadow: 0 0 4px var(--accent-color);
+    outline: none;
+  }
+
+  .btn {
+    text-align: center;
+    width:auto;
+    justify-items: center;
+    align-self: center;
+  }  
+  
+
+   button {
+    background-color: var(--primary-color);
+    color: var(--card-color);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+
+  button:hover {
+    background-color: var(--accent-color);
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 1.5rem;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+    }
+
+    .header p {
+      font-size: 0.9rem;
+    }
+
+    .form-button button {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+    }
+  }
+/* Default styles are already mobile-first, so media queries handle larger sizes */
+
+/* Tablet (Portrait) and larger devices */
+@media (min-width: 600px) {
+    .container {
+      max-width: 400px;
+      padding: 2rem;
+    }
+  
+    .header h1 {
+      font-size: 1.8rem;
+    }
+  
+    .form-button button {
+      font-size: 1rem;
+      padding: 0.9rem 2rem;
+    }
+  }
+  
+  /* Tablet (Landscape) and small desktop screens */
+  @media (min-width: 768px) {
+    .container {
+      max-width: 600px;
+      padding: 2.5rem;
+    }
+  
+    .header h1 {
+      font-size: 2rem;
+    }
+  
+    .header p {
+      font-size: 1.1rem;
+    }
+  
+    .form-group input, .form-group select {
+      font-size: 1rem;
+    }
+  
+    .form-button button {
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+    }
+  }
+  
+  /* Medium Desktop Screens (1024px and up) */
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 700px;
+      padding: 3rem;
+    }
+  
+    .header h1 {
+      font-size: 2.2rem;
+    }
+  
+    .header p {
+      font-size: 1.2rem;
+    }
+  
+    .form-group input, .form-group select {
+      font-size: 1.1rem;
+      padding: 1rem;
+    }
+  
+    .form-button button {
+      padding: 1.2rem 3rem;
+      font-size: 1.2rem;
+    }
+  }
+  
+  /* Large Desktop Screens (1200px and up) */
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 800px;
+      padding: 3.5rem;
+    }
+  
+    .header h1 {
+      font-size: 2.5rem;
+    }
+  
+    .header p {
+      font-size: 1.3rem;
+    }
+  
+    .form-group input, .form-group select {
+      font-size: 1.2rem;
+      padding: 1.2rem;
+    }
+  
+    .form-button button {
+      padding: 1.3rem 3.5rem;
+      font-size: 1.3rem;
+    }
+  }
+  
+  /* Large Mobile Phones (375px - 599px) */
+  @media (max-width: 599px) {
+    .container {
+      padding: 1.5rem;
+    }
+  
+    .header h1 {
+      font-size: 1.5rem;
+    }
+  
+    .header p {
+      font-size: 0.9rem;
+    }
+  
+    .form-group input, .form-group select {
+      font-size: 0.9rem;
+      padding: 0.7rem;
+    }
+  
+    .form-button button {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Small Mobile Phones (320px - 374px) */
+  @media (max-width: 374px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    .header h1 {
+      font-size: 1.2rem;
+    }
+  
+    .header p {
+      font-size: 0.8rem;
+    }
+  
+    .form-group input, .form-group select {
+      font-size: 0.8rem;
+      padding: 0.6rem;
+    }
+  
+    .form-button button {
+      padding: 0.6rem 1rem;
+      font-size: 0.8rem;
+    }
+  }
+  

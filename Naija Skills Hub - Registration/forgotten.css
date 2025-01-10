@@ -1,0 +1,150 @@
+/* Root Variables */
+:root {
+    --primary-color: #34495E; /* Vibrant Blue */
+    --secondary-color: #fbbc05; /* Bright Yellow */
+    --background-color: #f3f4f6; /* Soft Gray */
+    --text-color: #202124; /* Dark Gray */
+    --accent-color: #ff6f00; /* Bright Orange */
+    --card-color: #ffffff; /* Clean White */
+    --shadow-color: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.06); /* Subtle Shadow */
+    --highlight-color: #34495E; /* Warm Orange */
+    --font-family: 'Arial', sans-serif;
+  }
+  
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: var(--text-color);
+  }
+  
+  /* Container Styles */
+  .container {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem;
+  }
+  
+  .card {
+    background-color: var(--card-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-color);
+    padding: 2rem;
+    text-align: center;
+    animation: slideIn 1s ease-in-out;
+  }
+  
+  /* Card Title and Subtitle */
+  .title {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Form Styles */
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--background-color);
+    border-radius: 4px;
+    background-color: var(--background-color);
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .form-group input:focus {
+    box-shadow: 0 0 4px var(--accent-color);
+    outline: none;
+  }
+  
+  /* Button Styles */
+  .form-button button {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: var(--card-color);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .form-button button:hover {
+    background-color: var(--highlight-color);
+  }
+  
+  /* Footer Styles */
+  footer {
+    margin-top: 1rem;
+  }
+  
+  .back-to-login {
+    text-decoration: none;
+    color: var(--accent-color);
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .back-to-login:hover {
+    color: var(--secondary-color);
+  }
+  
+  /* Animations */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .card {
+      padding: 1.5rem;
+    }
+  
+    .title {
+      font-size: 1.5rem;
+    }
+  
+    .subtitle {
+      font-size: 0.9rem;
+    }
+  
+    .form-button button {
+      font-size: 0.9rem;
+      padding: 0.8rem;
+    }
+  }
+  
