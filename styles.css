@@ -472,6 +472,7 @@ footer {
     padding: 30px 10px;
     display: flex;
     flex-direction: column;
+    gap: 20px;
     box-shadow: 3px 5px 50px var(--primary-color);
     align-items: center;
     justify-content: center;
@@ -532,4 +533,12 @@ footer {
     align-items: center;
     font-size: 0.7rem;
     animation: fadeIn 1.5s ease-in;
+  }
+  
+  #reset-message {
+    font-size: 0.8rem;
+  }
+
+  .reset-container {
+    gap: unset;
   }
