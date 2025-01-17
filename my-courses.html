@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - LearnOria</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+    apiKey: "AIzaSyBbjenIU9JmzZwRsKQFptiT5T-EIXzUFMs",
+    authDomain: "banded-operator-308222.firebaseapp.com",
+    projectId: "banded-operator-308222",
+    storageBucket: "banded-operator-308222.firebasestorage.app",
+    messagingSenderId: "825781054877",
+    appId: "1:825781054877:web:9053bd037ff363bb7fd374"
+  };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const logoutButton = document.getElementById("logoutButton");
+
+            // Check if user is logged in
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    console.log("User logged in: ", user.email);
+                } else {
+                    console.log("No user logged in. Redirecting to login...");
+                    window.location.href = "login.html";
+                }
+            });
+
+            // Logout functionality
+            logoutButton.addEventListener("click", () => {
+                signOut(auth)
+                    .then(() => {
+                        console.log("User logged out.");
+                        window.location.href = "login.html";
+                    })
+                    .catch((error) => {
+                        console.error("Error logging out: ", error);
+                    });
+            });
+        });
+
+        // Fetch popular courses
+        async function loadCourses() {
+            const coursesContainer = document.getElementById("coursesContainer");
+            const coursesSnapshot = await getDocs(collection(db, "courses"));
+            coursesSnapshot.forEach((doc) => {
+                const course = doc.data();
+                const courseCard = `
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>${course.title}</h6>
+                                <p><strong>${course.type === "free" ? "Free" : `$${course.price}`}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                coursesContainer.innerHTML += courseCard;
+            });
+        }
+
+        loadCourses();
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4fafd;
+            color: #34495e;
+        }
+
+        .sidebar {
+            background-color: #e63946;
+            min-height: 100vh;
+            padding: 20px 0;
+            color: #ffffff;
+        }
+
+        .sidebar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            padding: 15px 20px;
+            border-radius: 8px;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #d62839;
+            font-weight: bold;
+            border-left: 4px solid #ffcc00;
+        }
+
+        .dashboard-header {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            color: #e63946;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #e63946;
+            color: white;
+            padding: 10px;
+        }
+
+        .chart {
+            height: 200px;
+        }
+
+        .profile-panel {
+            text-align: center;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-panel img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+
+        .stats div {
+            text-align: center;
+        }
+
+        .upgrade-widget {
+            background: #ffcc00;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .upgrade-widget p {
+            font-weight: bold;
+            color: #e63946;
+        }
+
+        .progress-bar {
+            background-color: #e63946;
+        }
+
+        .instructor-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .instructor-card img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 sidebar">
+                <div class="text-center mb-4">
+                    <h2>LearnOria</h2>
+                </div>
+                <a href="#" class="active">Dashboard</a>
+                <a href="#">My Course</a>
+                <a href="#">Favourite</a>
+                <a href="#">Exam</a>
+                <a href="#">Certificate</a>
+                <a href="#">Settings</a>
+                <button id="logoutButton" class="btn btn-warning mt-4 w-100">Logout</button>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 col-lg-10">
+                <div class="dashboard-header d-flex justify-content-between align-items-center">
+                    <h3>Welcome Back, User</h3>
+                    <input type="text" class="form-control" placeholder="Search Course or Instructor" style="width: 300px;">
+                </div>
+
+                <div class="container mt-4">
+                    <div class="row">
+                        <!-- Profile Panel -->
+                        <div class="col-md-3">
+                            <div class="profile-panel">
+                                <img src="https://via.placeholder.com/80" alt="User Profile">
+                                <h5>Jonas Schmedtmann</h5>
+                                <p>Member Since 2020</p>
+                                <div class="stats">
+                                    <div>
+                                        <p><strong>09</strong></p>
+                                        <p>Complete</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>18</strong></p>
+                                        <p>In Progress</p>
+                                    </div>
+                                    <div>
+                                        <p><strong>09</strong></p>
+                                        <p>Certificates</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Popular Courses -->
+                        <div class="col-md-9">
+                            <div class="row">
+                                <h5 class="mb-3">Popular Courses</h5>
+                                <div id="coursesContainer" class="row"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <!-- Learning Hours Chart -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Learning Hours</h5>
+                                    <canvas id="learningChart" class="chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Last Watched Video -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Last Watched</h5>
+                                    <p>Learning shape and form fundamentals</p>
+                                    <video class="w-100" controls>
+                                        <source src="video.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar" role="progressbar" style="width: 50%;">50%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <!-- Best Instructors -->
+                        <div class="col-md-6">
+                            <h5>Best Instructors</h5>
+                            <div class="instructor-card">
+                                <img src="https://via.placeholder.com/40" alt="Instructor">
+                                <p>Martha Powell - 12k Students</p>
+                            </div>
+                            <div class="instructor-card">
+                                <img src="https://via.placeholder.com/40" alt="Instructor">
+                                <p>Walter Griffin - 900 Students</p>
+                            </div>
+                            <div class="instructor-card">
+                                <img src="https://via.placeholder.com/40" alt="Instructor">
+                                <p>Johnny Matthews - 867 Students</p>
+                            </div>
+                        </div>
+
+                        <!-- Upgrade to Pro -->
+                        <div class="col-md-6">
+                            <div class="upgrade-widget">
+                                <p>1 Million People Using Pro Plans</p>
+                                <button class="btn btn-dark">Upgrade Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 LearnOria. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Learning Hours Chart
+        const ctx = document.getElementById('learningChart').getContext('2d');
+        const learningChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Hours',
+                    data: [50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325],
+                    borderColor: '#e63946',
+                    backgroundColor: 'rgba(230, 57, 70, 0.2)',
+                }],
+            },
+            options: {
+                responsive: true,
+            },
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

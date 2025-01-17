@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Naija SkillHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4fafd;
+            color: #34495e;
+        }
+
+        .sidebar {
+            background-color: #e63946;
+            min-height: 100vh;
+            padding: 20px 0;
+            color: #ffffff;
+        }
+
+        .sidebar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            padding: 15px 20px;
+            border-radius: 8px;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #d62839;
+            font-weight: bold;
+            border-left: 4px solid #ffcc00;
+        }
+
+        .dashboard-header {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            color: #e63946;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #e63946;
+            color: white;
+            padding: 10px;
+        }
+    </style>
+    <script type="module">
+        // Import Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getFirestore, collection, doc, getDocs, deleteDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+    apiKey: "AIzaSyBbjenIU9JmzZwRsKQFptiT5T-EIXzUFMs",
+    authDomain: "banded-operator-308222.firebaseapp.com",
+    projectId: "banded-operator-308222",
+    storageBucket: "banded-operator-308222.firebasestorage.app",
+    messagingSenderId: "825781054877",
+    appId: "1:825781054877:web:9053bd037ff363bb7fd374"
+  };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Fetch and Display Dashboard Stats
+        async function loadDashboardStats() {
+            const usersSnapshot = await getDocs(collection(db, "users"));
+            const coursesSnapshot = await getDocs(collection(db, "courses"));
+            const enrollmentsSnapshot = await getDocs(collection(db, "enrollments"));
+            const paymentsSnapshot = await getDocs(collection(db, "payments"));
+
+            document.getElementById("totalUsers").innerText = usersSnapshot.size;
+            document.getElementById("totalCourses").innerText = coursesSnapshot.size;
+            document.getElementById("totalEnrollments").innerText = enrollmentsSnapshot.size;
+
+            const totalPayments = paymentsSnapshot.docs.reduce((total, doc) => total + doc.data().amount, 0);
+            document.getElementById("totalPayments").innerText = `$${totalPayments.toLocaleString()}`;
+        }
+
+        // Fetch and Display Users
+        async function loadUsers() {
+            const usersSnapshot = await getDocs(collection(db, "users"));
+            const usersContainer = document.getElementById("usersContainer");
+            usersContainer.innerHTML = "";
+
+            usersSnapshot.forEach((doc) => {
+                const user = doc.data();
+                usersContainer.innerHTML += `
+                    <tr>
+                        <td>${user.fullName}</td>
+                        <td>${user.email}</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="deleteUser('${doc.id}')">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Delete User
+        async function deleteUser(userId) {
+            if (confirm("Are you sure you want to delete this user?")) {
+                await deleteDoc(doc(db, "users", userId));
+                alert("User deleted successfully!");
+                loadUsers();
+            }
+        }
+
+        // Fetch and Display Courses
+        async function loadCourses() {
+            const coursesSnapshot = await getDocs(collection(db, "courses"));
+            const coursesContainer = document.getElementById("coursesContainer");
+            coursesContainer.innerHTML = "";
+
+            coursesSnapshot.forEach((doc) => {
+                const course = doc.data();
+                coursesContainer.innerHTML += `
+                    <tr>
+                        <td>${course.title}</td>
+                        <td>${course.type}</td>
+                        <td>$${course.price}</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="deleteCourse('${doc.id}')">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Delete Course
+        async function deleteCourse(courseId) {
+            if (confirm("Are you sure you want to delete this course?")) {
+                await deleteDoc(doc(db, "courses", courseId));
+                alert("Course deleted successfully!");
+                loadCourses();
+            }
+        }
+
+        // Load on Page Load
+        document.addEventListener("DOMContentLoaded", () => {
+            loadDashboardStats();
+            loadUsers();
+            loadCourses();
+        });
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 sidebar">
+                <div class="text-center mb-4">
+                    <h2>Admin Panel</h2>
+                </div>
+                <a href="admin dashboard.html" class="active">Dashboard</a>
+                <a href="#">Manage Users</a>
+                <a href="#">Manage Courses</a>
+                <a href="#">Settings</a>
+                <a href="logout.html">Logout</a>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 col-lg-10">
+                <div class="dashboard-header d-flex justify-content-between align-items-center">
+                    <h3>Admin Dashboard</h3>
+                </div>
+
+                <div class="container mt-4">
+                    <!-- Dashboard Stats -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card text-center p-3">
+                                <h6>Total Users</h6>
+                                <h2 id="totalUsers">Loading...</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center p-3">
+                                <h6>Total Courses</h6>
+                                <h2 id="totalCourses">Loading...</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center p-3">
+                                <h6>Total Enrollments</h6>
+                                <h2 id="totalEnrollments">Loading...</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center p-3">
+                                <h6>Total Payments</h6>
+                                <h2 id="totalPayments">Loading...</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manage Users -->
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5 class="section-title">Manage Users</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersContainer">
+                                    <!-- Users will be dynamically loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Manage Courses -->
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5 class="section-title">Manage Courses</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Type</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="coursesContainer">
+                                    <!-- Courses will be dynamically loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Naija SkillHub. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
