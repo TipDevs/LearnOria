@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Public read access for courses collection
+    match /courses/{courseId} {
+      allow read: if true; // Anyone can read courses
+      allow write: if request.auth != null && request.auth.token.admin == true; // Only admins can write
+    }
+
+    // Secure userEnrollments collection
+    match /userEnrollments/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId; // Users can access their own data
+    }
+
+    // Secure userProfiles collection
+    match /userProfiles/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId; // Users can manage their profile
+    }
+
+    // Allow authenticated users to write to feedback or reviews
+    match /feedback/{feedbackId} {
+      allow read: if true; // Public can view feedback
+      allow write: if request.auth != null; // Only authenticated users can write feedback
+    }
+
+    // General rule for other collections
+    match /{document=**} {
+      allow read: if request.auth != null; // Authenticated users can read
+      allow write: if request.auth != null; // Authenticated users can write
+    }
+  }
+}
