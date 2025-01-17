@@ -22,7 +22,7 @@ closeModal.addEventListener('click', () => {
 
 // ----------Switch to Login form
 loginBtn.addEventListener('click', () => {
-  window.location.href = 'login_signup.html';
+  window.location.href = 'login.html';
 });
 
 // -------Switch to Sign Up form
