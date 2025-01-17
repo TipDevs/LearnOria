@@ -32,7 +32,7 @@
                     console.log("User logged in: ", user.email);
                 } else {
                     console.log("No user logged in. Redirecting to login...");
-                    window.location.href = "login_signup.html";
+                    window.location.href = "login.html";
                 }
             });
 
@@ -41,7 +41,7 @@
                 signOut(auth)
                     .then(() => {
                         console.log("User logged out.");
-                        window.location.href = "login_signup.html";
+                        window.location.href = "login.html";
                     })
                     .catch((error) => {
                         console.error("Error logging out: ", error);
